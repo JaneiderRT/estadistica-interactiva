@@ -14,10 +14,9 @@ const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(
 
 export default defineConfig({
   // 1. BASE: Solo en producción apunta al repo. En local es raíz '/'.
-  base: process.env.NODE_ENV === 'production' ? '/estadistica-interactiva/' : '/',
-
+  // base: process.env.NODE_ENV === 'production' ? '/estadistica-interactiva/' : '/',
+  base: '/',
   plugins: plugins,
-
   resolve: {
     alias: {
       // Ajustado a tu nueva estructura en raíz
