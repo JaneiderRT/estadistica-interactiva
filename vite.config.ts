@@ -1,21 +1,15 @@
 import { defineConfig } from 'vite';
 import path from 'path';
-// Asegúrate de importar tus plugins aquí si no están globales
-// import react from '@vitejs/plugin-react';
 import { jsxLocPlugin } from "@builder.io/vite-plugin-jsx-loc";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
-import fs from "node:fs";
-// import path from "node:path";
-// import { defineConfig, type Plugin, type ViteDevServer } from "vite";
+// import fs from "node:fs";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime()];
 
 export default defineConfig({
-  // 1. BASE: Solo en producción apunta al repo. En local es raíz '/'.
-  // base: process.env.NODE_ENV === 'production' ? '/estadistica-interactiva/' : '/',
-  base: '/',
+  base: process.env.NODE_ENV === 'production' ? '/estadistica-interactiva/' : '/',
   plugins: plugins,
   resolve: {
     alias: {
@@ -25,18 +19,12 @@ export default defineConfig({
       "@assets": path.resolve(import.meta.dirname, "attached_assets"),
     },
   },
-
   envDir: path.resolve(import.meta.dirname),
-
-  // 2. ROOT: Apunta a la raíz donde está el index.html ahora
   root: path.resolve(import.meta.dirname),
-
   build: {
-    // 3. OUTDIR: Genera la carpeta dist en la raíz
     outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
   },
-
   server: {
     port: 3000,
     strictPort: false,
